@@ -1,0 +1,185 @@
+/** INPUT FILE **/
+.input-group *:not([type='file']){
+  user-select: none;
+}
+label[for='userAvatar'] {
+  font-weight: 500;
+  display: block;
+  margin: 4px 0;
+  text-transform: uppercase;
+  font-size: 13px;
+  overflow: hidden;
+}
+label[for='userAvatar'] span {
+  float: right;
+  text-transform: none;
+  font-weight: 200;
+  line-height: 1em;
+  font-style: italic;
+  opacity: 0.8;
+}
+.input-group input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.input-group .file-dummy {
+  width: 100%;
+  padding: 4rem;
+  color: #df9800;
+  background: rgba(134, 134, 134, 0.1);
+  border: 2px dashed rgba(134, 134, 134, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+.input-group .file-dummy .success {
+  display: none;
+}
+.input-group:hover .file-dummy {
+  background: rgba(156, 156, 156, 0.5);
+}
+.input-group input[type="file"]:focus + .file-dummy {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline: -webkit-focus-ring-color auto 5px;
+}
+.input-group input[type="file"]:valid + .file-dummy {
+  border-color: rgba(0, 255, 0, 0.4);
+  background-color: rgba(0, 255, 0, 0.3);
+  color: #005606;
+}
+.input-group input[type="file"]:valid + .file-dummy .success {
+  display: inline-block;
+}
+.input-group input[type="file"]:valid + .file-dummy .default {
+  display: none;
+}
+#no-script {
+    width: auto;
+    height: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+#no-script-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 3rem;
+    padding: 0.5em;
+    border: 0.2em solid yellow;
+    border-radius: 0.5em;
+    background-color: hsl(51, 94%, 81%);
+}
+#no-script-img {
+    width: 25%;
+    height: auto;
+    min-height: 200px;
+    background-image: url('https://logosdownload.com/logo/javascript-logo.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+#no-script-maintext {
+    font-size: 3rem;
+}
+#no-script-subtext {
+    font-size: 1.5rem;
+}
+#menu-header {
+  user-select: none;
+}
+@media screen and (max-width: 758px) {
+    #no-script-maintext {
+      font-size: 2rem;
+    }
+  
+    #no-script-subtext {
+      font-size: 1.2rem;
+    }
+  
+    #no-script-img {
+      width: 100px;
+    }
+}
+button#btnTop {
+    width: 50px; 
+    height: 50px;
+    display: none;
+    opacity: 1;
+    transition: 0.3s;
+    background-color: transparent;
+    border: none;
+    position: fixed;
+    bottom: 4.5rem;
+    right: .75rem;
+    z-index: 99;
+    cursor: pointer;
+    text-align: center;
+    animation: fadeOutLeft .2s ease-in both;
+}
+button#btnTop.show {
+  display: block;
+  animation: fadeInLeft .2s ease-in both;
+}
+button#btnTop{
+    cursor: pointer;
+    opacity: 0.8;
+}
+/*  ANIMADOS */
+div.prod-show {
+  animation: fadeInUp .4s ease-in both;
+}
+ul.dropdown-menu.show {
+  animation: fadeInUp .2s ease-in both;
+}
+/*  ANIMACIONES */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -10%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(4%, 0, 0);
+    }
+    from {
+        opacity: 0.5;
+        transform: translate3d(2%, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes fadeOutLeft {
+    from {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    from {
+        opacity: 0.5;
+        transform: translate3d(2%, 0, 0);
+    }
+    to {
+        opacity: 0;
+        transform: translate3d(5%, 0, 0);
+    }
+}
