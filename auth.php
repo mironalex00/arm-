@@ -4,39 +4,38 @@
     if(!isset($_SESSION['user'])){
         echo "\n" . <<<HTML
         <script type="module">
-            import { SignIn, SignUp } from './assets/js/session.js'
-            window.login = (form, callback) => SignIn(form, (response) => {
-                if(callback) callback(response);
-            });
-            window.signup = (form, callback) => SignUp(form, (response) => {
-                if(callback) callback(response);
-            });
-            document.forms.login.addEventListener('submit', (e) => {
-                if(validateForm(e) === true) {
-                    login(e.srcElement, res => {
-                        if(res?.errors){
-                            alert(res.errors); // ?.join(', ').replace(/, ([^,]*)$/, ' and $1')
-                            return;
-                        }
-                        window.location.href = './'
-                    });
+        import { ValidateForm } from './assets/js/app.js'
+        import { SignIn, SignUp } from './assets/js/session.js'
+        document.forms.login.addEventListener('submit', (e) => {
+            ValidateForm(e, (res) => {
+                if(res !== true) {
+                    alert(res);
+                    return;
                 }
+                SignIn(e.srcElement).then(res => {
+                    if(res?.errors){
+                        alert(res.errors?.join(', ').replace(/, ([^,]*)$/, ' and $1'));
+                        return;
+                    }
+                    window.location.href = './';
+                });
             });
-            document.forms.signup.addEventListener('submit', (e) => {
-                if(validateForm(e) === true) {
-                    signup(e.srcElement, res => {
-                        if(res?.errors){
-                            alert(res.errors); // ?.join(', ').replace(/, ([^,]*)$/, ' and $1')
-                            return;
-                        }else if(res?.action?.redirect){
-                            const user = e.srcElement.user.value, pass = e.srcElement.pass.value;
-                            document.querySelector("label[for='reg-log']").click();
-                            document.forms.login.user.value = user;
-                            document.forms.login.pass.value = pass;
-                        }
-                    });
+        });
+        document.forms.signup.addEventListener('submit', (e) => {
+            ValidateForm(e, (res) => {
+                if(res !== true) {
+                    alert(res);
+                    return;
                 }
+                SignUp(e.srcElement).then(res => {
+                    if(res?.errors){
+                        alert(res.errors?.join(', ').replace(/, ([^,]*)$/, ' and $1'));
+                        return;
+                    }
+                    document.querySelector("label[for='reg-log']").click();
+                });
             });
+        });
         </script>
         HTML;
     }
@@ -93,10 +92,12 @@
                                     <label for="signup_pass" class="form-label text-white">Contraseña</label>
                                     <div class="grid">
                                         <div>
-                                            <input type="password" class="form-control" id="signup_pass" name="pass"  pattern="<?= PASSREGEX; ?>" required />
+                                            <input type="password" class="form-control" id="signup_pass" name="pass" pattern="<?= PASSREGEX; ?>" required />
                                         </div>
                                         <div onclick="togglePassword(this)">
-                                            <a class="g-col-2 btn btn-light h-100 togglePassword"><i class="fa-regular fa-eye-slash"></i></a>
+                                            <a class="g-col-2 btn btn-light h-100 togglePassword">
+                                                <i class="fa-regular fa-eye-slash"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

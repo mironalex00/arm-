@@ -25,9 +25,13 @@ $last_request_uri = mb_convert_case(basename($request_uri), MB_CASE_TITLE, 'UTF-
     <link rel="stylesheet" href="./assets/css/main.css">
     <!-- SCRIPTS    -->
     <script  type="module">
+        import { LogOut } from './assets/js/session.js'
         if(document.querySelector('#no-script')) document.querySelector('#no-script').remove();
         if(document.querySelector('#main').style) document.querySelector('#main').removeAttribute('style');
-        import { LogOut } from './assets/js/session.js'
+        window.mainProps = Object.assign({ 'regexEmail': new RegExp("<?= MAILREGEX ?>")}, window.mainProps);
+        window.mainProps = Object.assign({ 'regexPassword': new RegExp("<?= PASSREGEX ?>")}, window.mainProps);
+        window.mainProps = Object.assign({ 'regexText': new RegExp("<?= NAMEREGEX ?>")}, window.mainProps);
+        window.mainProps = Object.assign({ 'regexUser': new RegExp("<?= USERREGEX ?>")}, window.mainProps);
         window.logout = () => LogOut();
     </script>
     <script src="./assets/js/main.js"></script>

@@ -65,12 +65,10 @@
                 if($userInp->pass !== $userOut->userPass) {
                     http_response_code(403);
                     echo json_encode(array('errors' => array('Credenciales de usuario/s incorrectas')), JSON_UNESCAPED_UNICODE );
-                    return;
                 }else{
                     $userOut = (object) reset(getUser($data)['data']);
                     unset($userOut->userPass);
                     $_SESSION['user'] = (object) array('online' => true, 'logindate' => CURRENTDATE, 'data' => $userOut);
-                    echo json_encode(array( 'action' => array('redirect' => get_path() . '/')), JSON_UNESCAPED_UNICODE );
                 }
             return;
             case $key === 'auth' && $action === 'signup':

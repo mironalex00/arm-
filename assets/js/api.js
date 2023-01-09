@@ -1,5 +1,5 @@
 //  SE IMPORTAN DE APP
-import { RemoveSessionStorage } from './app.js';
+import { RemoveSessionStorage, JsonChecker } from './app.js';
 
 //  FUNCION ENCARGADA DE AÑADIR UNA ORDEN
 function CreateOrder(form, callback) {
@@ -9,10 +9,10 @@ function CreateOrder(form, callback) {
     xhr.open("POST", "./assets/php/controller/procesar.php");
     xhr.send(formData);
     xhr.onload = function() {
-        if(callback && xhr.response) {
-            callback(xhr.response);
+        if(callback) {
+            callback(xhr.response ?? {errors: "El servidor no pudo responder a tu petición"});
         }else {
-            callback({errors: "El servidor no pudo responder a tu petición"});
+            throw new Error("No callback provided")
         }
     };
 }
@@ -21,7 +21,7 @@ function DeleteCart() { RemoveSessionStorage('cart') }
 //  FUNCION QUE OBTIENE CARRITO
 function GetCart() {
     const result = sessionStorage.getItem("cart");
-    if(!jsonChecker(result)) return null;
+    if(!JsonChecker(result)) return null;
     return JSON.parse(result)?.sort(function(a, b){
         let x = a.prod.toLowerCase();
         let y = b.prod.toLowerCase();
@@ -57,8 +57,8 @@ function GetCategories(callback) {
     };
 }
 //  ACTUALIZA EL CARRITO
-function UpdateCard(order, add = true) {
-    let cart = getCart();
+function UpdateCart(order, add = true) {
+    let cart = GetCart();
     if(cart === null) {
         sessionStorage.setItem("cart", JSON.stringify([order]));
     }else{
@@ -77,6 +77,8 @@ function UpdateCard(order, add = true) {
         }
         sessionStorage.setItem("cart", JSON.stringify(cart));
     }
+    const cartStorageEvent = new StorageEvent('storage', { key: 'cart' });
+    window.dispatchEvent(cartStorageEvent);
 }
 //  EXPORTACION DE MODULOS
-export { CreateOrder, DeleteCart, GetCart, UpdateCard, GetProducts, GetCategories };
+export { CreateOrder, DeleteCart, GetCart, UpdateCart, GetProducts, GetCategories };
