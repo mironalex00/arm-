@@ -47,8 +47,8 @@ Los servicios XAMPP, MAMPP o LAMPP incluyen empaquetados estos servicios sin nec
             SSLCertificateFile "C:/xampp/apache/conf/ssl.crt/server.crt"
             SSLCertificateKeyFile "C:/xampp/apache/conf/ssl.key/server.key"
             #   -   -   -  LOG   -   -   -
-            ErrorLog "C:/xampp/htdocs/.logs/localhost.error.log"
-            CustomLog "C:/xampp/htdocs/.logs/localhost.access.log" common
+            ErrorLog "C:/xampp/htdocs/localhost.error.log"
+            CustomLog "C:/xampp/htdocs/localhost.access.log" common
             #   -   -   -  SRC   -   -   -
             <Directory "C:/xampp/htdocs/">
             #AllowOverride All
