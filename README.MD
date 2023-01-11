@@ -31,6 +31,36 @@ Los servicios XAMPP, MAMPP o LAMPP incluyen empaquetados estos servicios sin nec
 4. Importar la base de datos [SQL](./assets/php/controller/important_files/db.sql)
 4. Entrar dentro de la siguiente [URL](https://localhost/Tema_04/)
 5. Disfrutar de la aplicaci&oacute;n
+##  Si dispone de XAMPP
+1. Deberá modificar el archivo de <u>httpd-vhosts.conf</u>:
+    - En **Windows** la ruta base es: **C:/xampp/apache/conf/extra/httpd-vhosts.conf**
+    - En **Linux** la ruta es distinta dependiendo la distribución.
+    - Añadir al archivo:
+    ```
+        #  -   -   -   -   -    LOCALHOST  -   -   -   -   - 
+        <VirtualHost localhost:443>
+            ServerAdmin admin@localhost
+            DocumentRoot "C:/xampp/htdocs/"
+            ServerName 127.0.0.1
+            #   -   -   -  SSL   -   -   -
+            SSLEngine On
+            SSLCertificateFile "C:/xampp/apache/conf/ssl.crt/server.crt"
+            SSLCertificateKeyFile "C:/xampp/apache/conf/ssl.key/server.key"
+            #   -   -   -  LOG   -   -   -
+            ErrorLog "C:/xampp/htdocs/.logs/localhost.error.log"
+            CustomLog "C:/xampp/htdocs/.logs/localhost.access.log" common
+            #   -   -   -  SRC   -   -   -
+            <Directory "C:/xampp/htdocs/">
+            #AllowOverride All
+            #Order allow,deny
+            #Allow from all
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride All
+            Require local
+            </Directory>
+        </VirtualHost>
+    ```
+2. Reiniciar el servidor de Apache
 
 # Propuestas de mejora
 
