@@ -37,28 +37,28 @@ Los servicios XAMPP, MAMPP o LAMPP incluyen empaquetados estos servicios sin nec
     - En **Linux** la ruta es distinta dependiendo la distribución.
     - Añadir al archivo:
     ```
-        #  -   -   -   -   -    LOCALHOST  -   -   -   -   - 
-        <VirtualHost localhost:443>
-            ServerAdmin admin@localhost
-            DocumentRoot "C:/xampp/htdocs/"
-            ServerName 127.0.0.1
-            #   -   -   -  SSL   -   -   -
-            SSLEngine On
-            SSLCertificateFile "C:/xampp/apache/conf/ssl.crt/server.crt"
-            SSLCertificateKeyFile "C:/xampp/apache/conf/ssl.key/server.key"
-            #   -   -   -  LOG   -   -   -
-            ErrorLog "C:/xampp/htdocs/localhost.error.log"
-            CustomLog "C:/xampp/htdocs/localhost.access.log" common
-            #   -   -   -  SRC   -   -   -
-            <Directory "C:/xampp/htdocs/">
-            #AllowOverride All
-            #Order allow,deny
-            #Allow from all
-            Options Indexes FollowSymLinks MultiViews
-            AllowOverride All
-            Require local
-            </Directory>
-        </VirtualHost>
+    #  -   -   -   -   -    LOCALHOST  -   -   -   -   - 
+    <VirtualHost localhost:443>
+        ServerAdmin admin@localhost
+        DocumentRoot "C:/xampp/htdocs/"
+        ServerName 127.0.0.1
+        #   -   -   -  SSL   -   -   -
+        SSLEngine On
+        SSLCertificateFile "C:/xampp/apache/conf/ssl.crt/server.crt"
+        SSLCertificateKeyFile "C:/xampp/apache/conf/ssl.key/server.key"
+        #   -   -   -  LOG   -   -   -
+        ErrorLog "C:/xampp/htdocs/localhost.error.log"
+        CustomLog "C:/xampp/htdocs/localhost.access.log" common
+        #   -   -   -  SRC   -   -   -
+        <Directory "C:/xampp/htdocs/">
+        #AllowOverride All
+        #Order allow,deny
+        #Allow from all
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require local
+        </Directory>
+    </VirtualHost>
     ```
 2. Reiniciar el servidor de Apache
 
